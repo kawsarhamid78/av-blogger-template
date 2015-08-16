@@ -2,166 +2,46 @@
 <!DOCTYPE html>
 <html b:version='2' class='v2' expr:dir='data:blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
   <head>
-    <b:include data='blog' name='all-head-content'/>
+    <link expr:href='(data:blog.homepageUrl + &quot;favicon.ico&quot;)' rel='icon' type='image/x-icon'/>
+    <!--link expr:href='data:blog.homepageUrl' rel='canonical'/-->
+    <link expr:href='(data:blog.homepageUrl + &quot;feeds/posts/default&quot;)' expr:title='(data:blog.title + &quot; - Atom&quot;)' rel='alternate' type='application/atom+xml'/>
+    <link expr:href='(data:blog.homepageUrl + &quot;posts/default?alt=rss&quot;)' expr:title='(data:blog.title + &quot; - RSS&quot;)' rel='alternate' type='application/rss+xml'/>
+    <link href='https://www.blogger.com/openid-server.g' rel='openid.server'/>
+    <link expr:href='data:blog.homepageUrl' rel='openid.delegate'/>
+	<link expr:href='data:blog.canonicalUrl' rel='canonical'/>
     <title>
       <data:blog.pageTitle/>
     </title>
-
-	 &lt;!--[if lt IE 9]&gt;
-		<script src='//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'/>
-    	<script src='//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js'/>
+    <meta charset='utf-8'/>
+    <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'/>
+    <meta content='width=device-width, initial-scale=1' name='viewport'/>
+    
+    <b:if cond='data:blog.pageType == &quot;item&quot;'>
+      <meta content='article' property='og:type'/>
+    </b:if>
+    &lt;!--[if lt IE 9]&gt;
+	  <script src='http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js'/>
     &lt;![endif]--&gt;
-    <link href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' rel='stylesheet' type='text/css'/>
-    <link href='//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css' rel='stylesheet'/>
+    <!-- Layout style -->
+    <link href='//cdn.jsdelivr.net/bootstrap/3.3.5/css/bootstrap.min.css' rel='stylesheet' type='text/css'/>
     <b:skin><![CDATA[
       
-/*
------------------------------------------------
-Blogger Template Style
-Name:     Simple
-Designer: Josh Peterson
-URL:      www.noaesthetic.com
------------------------------------------------ */
 /* Variable definitions
 ====================
-<Variable name="keycolor" description="Main Color" type="color" default="#66bbdd" value="#ffffff"/>
-<Group description="Page Text" selector="body">
-<Variable name="body.font" description="Font" type="font"
-default="normal normal 12px Arial, Tahoma, Helvetica, FreeSans, sans-serif" value="normal normal 12px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
-<Variable name="body.text.color" description="Text Color" type="color" default="#222222" value="#5d5d5d"/>
-</Group>
-<Group description="Backgrounds" selector=".body-fauxcolumns-outer">
-<Variable name="body.background.color" description="Outer Background" type="color" default="#66bbdd" value="#ffffff"/>
-<Variable name="content.background.color" description="Main Background" type="color" default="#ffffff" value="#ffffff"/>
-<Variable name="header.background.color" description="Header Background" type="color" default="transparent" value="transparent"/>
-</Group>
-<Group description="Links" selector=".main-outer">
-<Variable name="link.color" description="Link Color" type="color" default="#2288bb" value="#181717"/>
-<Variable name="link.visited.color" description="Visited Color" type="color" default="#888888" value="#5e5a5a"/>
-<Variable name="link.hover.color" description="Hover Color" type="color" default="#33aaff" value="#33aaff"/>
-</Group>
-<Group description="Blog Title" selector=".header h1">
-<Variable name="header.font" description="Font" type="font"
-default="normal normal 60px Arial, Tahoma, Helvetica, FreeSans, sans-serif" value="normal normal 60px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
-<Variable name="header.text.color" description="Title Color" type="color" default="#3399bb"  value="#cb4247"/>
-</Group>
-<Group description="Blog Description" selector=".header .description">
-<Variable name="description.text.color" description="Description Color" type="color"
-default="#777777"  value="#868686"/>
-</Group>
-<Group description="Tabs Text" selector=".tabs-inner .widget li a">
-<Variable name="tabs.font" description="Font" type="font"
-default="normal normal 14px Arial, Tahoma, Helvetica, FreeSans, sans-serif" value="normal normal 14px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
-<Variable name="tabs.text.color" description="Text Color" type="color" default="#999999" value="#a3a3a3"/>
-<Variable name="tabs.selected.text.color" description="Selected Color" type="color" default="#000000" value="#000000"/>
-</Group>
-<Group description="Tabs Background" selector=".tabs-outer .PageList">
-<Variable name="tabs.background.color" description="Background Color" type="color" default="#f5f5f5" value="#f9f9f9"/>
-<Variable name="tabs.selected.background.color" description="Selected Color" type="color" default="#eeeeee" value="#f2f2f2"/>
-</Group>
-<Group description="Post Title" selector="h3.post-title, .comments h4">
-<Variable name="post.title.font" description="Font" type="font"
-default="normal normal 22px Arial, Tahoma, Helvetica, FreeSans, sans-serif" value="normal normal 22px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
-</Group>
-<Group description="Post Brevel" selector=".post">
-<Variable name="post.brevel.length" description="Bevel border length of the post" type="length" default="2px" min="0" max="100px" value="2px"/>
-<Variable name="post.brevel.color" description="Bevel border color of the post"  type="color" default="#999999"  value="#a3a3a3"/>
-</Group>
-<Group description="Date Header" selector=".date-header">
-<Variable name="date.header.color" description="Text Color" type="color"
-default="$(body.text.color)" value="#a9ff32"/>
-<Variable name="date.header.background.color" description="Background Color" type="color"
-default="transparent" value="transparent"/>
-<Variable name="date.header.font" description="Text Font" type="font"
-default="normal bold 11px Arial, Tahoma, Helvetica, FreeSans, sans-serif" value="normal bold 11px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
-<Variable name="date.header.padding" description="Date Header Padding" type="string" default="inherit" value="inherit"/>
-<Variable name="date.header.letterspacing" description="Date Header Letter Spacing" type="string" default="inherit" value="inherit"/>
-<Variable name="date.header.margin" description="Date Header Margin" type="string" default="inherit" value="inherit"/>
-</Group>
-<Group description="Post Footer" selector=".post-footer">
-<Variable name="post.footer.text.color" description="Text Color" type="color" default="#666666" value="#7a7a7a"/>
-<Variable name="post.footer.background.color" description="Background Color" type="color"
-default="#f9f9f9" value="#fdfdfd"/>
-<Variable name="post.footer.border.color" description="Shadow Color" type="color" default="#eeeeee" value="#f2f2f2"/>
-</Group>
-<Group description="Gadgets" selector="h2">
-<Variable name="widget.title.font" description="Title Font" type="font"
-default="normal bold 11px Arial, Tahoma, Helvetica, FreeSans, sans-serif" value="normal bold 11px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
-<Variable name="widget.title.text.color" description="Title Color" type="color" default="#000000" value="#000000"/>
-<Variable name="widget.alternate.text.color" description="Alternate Color" type="color" default="#999999" value="#a3a3a3"/>
-</Group>
-<Group description="Images" selector=".main-inner">
-<Variable name="image.background.color" description="Background Color" type="color" default="#ffffff" value="#ffffff"/>
-<Variable name="image.border.color" description="Border Color" type="color" default="#eeeeee" value="#f2f2f2"/>
-<Variable name="image.text.color" description="Caption Text Color" type="color" default="$(body.text.color)" value="$(body.text.color)"/>
-</Group>
-<Group description="Accents" selector=".content-inner">
-<Variable name="body.rule.color" description="Separator Line Color" type="color" default="#eeeeee" value="#f2f2f2"/>
-<Variable name="tabs.border.color" description="Tabs Border Color" type="color" default="$(body.rule.color)" value="$(body.rule.color)"/>
-</Group>
-<Variable name="body.background" description="Body Background" type="background"
-color="$(body.background.color)" default="$(color) none repeat scroll top left" value="$(color) none repeat scroll top left"/>
-<Variable name="body.background.override" description="Body Background Override" type="string" default="" value=""/>
-<Variable name="body.background.gradient.cap" description="Body Gradient Cap" type="url"
-default="url(//www.blogblog.com/1kt/simple/gradients_light.png)" value="none"/>
-<Variable name="body.background.gradient.tile" description="Body Gradient Tile" type="url"
-default="url(//www.blogblog.com/1kt/simple/body_gradient_tile_light.png)" value="none"/>
-<Variable name="content.background.color.selector" description="Content Background Color Selector" type="string" default=".content-inner" value=".content-inner"/>
-<Variable name="content.padding" description="Content Padding" type="length" default="10px" min="0" max="100px" value="10px"/>
-<Variable name="content.padding.horizontal" description="Content Horizontal Padding" type="length" default="$(content.padding)" min="0" max="100px" value="40px"/>
-<Variable name="content.shadow.spread" description="Content Shadow Spread" type="length" default="40px" min="0" max="100px" value="0"/>
-<Variable name="content.shadow.spread.webkit" description="Content Shadow Spread (WebKit)" type="length" default="5px" min="0" max="100px" value="0"/>
-<Variable name="content.shadow.spread.ie" description="Content Shadow Spread (IE)" type="length" default="10px" min="0" max="100px" value="0"/>
-<Variable name="main.border.width" description="Main Border Width" type="length" default="0" min="0" max="10px" value="0"/>
-<Variable name="header.background.gradient" description="Header Gradient" type="url" default="none" value="none"/>
-<Variable name="header.shadow.offset.left" description="Header Shadow Offset Left" type="length" default="-1px" min="-50px" max="50px" value="0"/>
-<Variable name="header.shadow.offset.top" description="Header Shadow Offset Top" type="length" default="-1px" min="-50px" max="50px" value="0"/>
-<Variable name="header.shadow.spread" description="Header Shadow Spread" type="length" default="1px" min="0" max="100px" value="0"/>
-<Variable name="header.padding" description="Header Padding" type="length" default="30px" min="0" max="100px" value="0"/>
-<Variable name="header.border.size" description="Header Border Size" type="length" default="1px" min="0" max="10px" value="1px"/>
-<Variable name="header.bottom.border.size" description="Header Bottom Border Size" type="length" default="$(header.border.size)" min="0" max="10px" value="0"/>
-<Variable name="header.border.horizontalsize" description="Header Horizontal Border Size" type="length" default="0" min="0" max="10px" value="1px"/>
-<Variable name="description.text.size" description="Description Text Size" type="string" default="140%" value="18px"/>
-<Variable name="tabs.margin.top" description="Tabs Margin Top" type="length" default="0" min="0" max="100px" value="0"/>
-<Variable name="tabs.margin.side" description="Tabs Side Margin" type="length" default="30px" min="0" max="100px" value="30px"/>
-<Variable name="tabs.background.gradient" description="Tabs Background Gradient" type="url"
-default="url(//www.blogblog.com/1kt/simple/gradients_light.png)" value="none"/>
-<Variable name="tabs.border.width" description="Tabs Border Width" type="length" default="1px" min="0" max="10px" value="1px"/>
-<Variable name="tabs.bevel.border.width" description="Tabs Bevel Border Width" type="length" default="1px" min="0" max="10px" value="1px"/>
-<Variable name="post.margin.bottom" description="Post Bottom Margin" type="length" default="25px" min="0" max="100px" value="45px"/>
-<Variable name="image.border.small.size" description="Image Border Small Size" type="length" default="2px" min="0" max="10px" value="2px"/>
-<Variable name="image.border.large.size" description="Image Border Large Size" type="length" default="5px" min="0" max="10px" value="5px"/>
-<Variable name="page.width.selector" description="Page Width Selector" type="string" default=".region-inner" value=".region-inner"/>
-<Variable name="page.width" description="Page Width" type="string" default="auto" value="auto"/>
-<Variable name="main.section.margin" description="Main Section Margin" type="length" default="15px" min="0" max="100px" value="1em"/>
-<Variable name="main.padding" description="Main Padding" type="length" default="15px" min="0" max="100px" value="0"/>
-<Variable name="main.padding.top" description="Main Padding Top" type="length" default="30px" min="0" max="100px" value="35px"/>
-<Variable name="main.padding.bottom" description="Main Padding Bottom" type="length" default="30px" min="0" max="100px" value="65px"/>
-<Variable name="paging.background"
-color="$(content.background.color)"
-description="Background of blog paging area" type="background"
-default="transparent none no-repeat scroll top center" value="transparent url(//www.blogblog.com/1kt/simple/paging_dot.png) repeat-x scroll top center"/>
-<Variable name="footer.bevel" description="Bevel border length of footer" type="length" default="0" min="0" max="10px" value="1px"/>
-<Variable name="mobile.background.overlay" description="Mobile Background Overlay" type="string"
-default="transparent none repeat scroll top left" value="transparent none repeat scroll top left"/>
-<Variable name="mobile.background.size" description="Mobile Background Size" type="string" default="auto" value="auto"/>
-<Variable name="mobile.button.color" description="Mobile Button Color" type="color" default="#ffffff"  value="#ffffff"/>
-<Variable name="startSide" description="Side where text starts in blog language" type="automatic" default="left" value="left"/>
-<Variable name="endSide" description="Side where text ends in blog language" type="automatic" default="right" value="right"/>
 */
 /* Content
------------------------------------------------ */
+==================== */
 body {
 font-family: 'Open Sans', sans-serif;
-color: $(body.text.color);
-background: $(body.background);
-padding: 0 $(content.shadow.spread) $(content.shadow.spread) $(content.shadow.spread);
-$(body.background.override)
+color: #333;
+background: white;
+padding: 0;
+font-size: 150%;
 }
-html body $(page.width.selector) {
+html body {
 min-width: 0;
 max-width: 100%;
-width: $(page.width);
+width: 100%;
 }
 h1, h2, h3, h4, h5, h6 {
 font-family : Signika,sans-serif;
@@ -183,23 +63,29 @@ font-size: 1em;
 }
 a:link {
 text-decoration:none;
-color: $(link.color);
+color: #333;
 transition: color 0.4s ease 0s;
 }
 a:visited {
 text-decoration:none;
-color: $(link.visited.color);
 }
 a:hover {
 text-decoration:underline;
-color: $(link.hover.color);
+}
+* { 
+-webkit-border-radius: 0 !important;
+-moz-border-radius: 0 !important;
+border-radius: 0 !important;
+}
+.PageList .nav-tabs {
+border-bottom : 0px solid transparent;
 }
 .centered {
 float: none;
 margin: 0 auto;
 }
 .post {
-border : $(post.brevel.length) solid $(post.brevel.color);
+border : 2px solid #999;
 }
 .jump-link:link {
 padding: 0.5em;
@@ -240,53 +126,66 @@ color: #3b5998;
 .dropdown-menu > li > a.sb-printerest:hover {
 color: #D01E15;
 }
-
 .popular-posts ul li {
-  list-style: none;
+list-style: none;
 }
-
 
     ]]></b:skin>
     <b:template-skin>
       <b:variable default='980px' name='content.width' type='length' value='980px'/>
       <b:variable default='0' name='main.column.left.width' type='length' value='0px'/>
       <b:variable default='310px' name='main.column.right.width' type='length' value='260px'/>
-	  <b:variable default='768px' description='Responsive Breaking Point' name='main.breaking.point' type='length' value='768px'/>
+      <b:variable default='768px' description='Responsive Breaking Point' name='main.breaking.point' type='length' value='768px'/>
       <![CDATA[
 /* Bootstrap column overwrite */
 .container-main-block {
 max-width: $(content.width);
 }
-
-
 .col-main, .col-right {
-	position: relative;
-	min-height: 1px;
-	padding-right: 15px;
-	padding-left: 15px;
-
+position: relative;
+min-height: 1px;
+padding-right: 15px;
+padding-left: 15px;
 }
-
-
-
-
+/* layout style */
+#layout .col-main, #layout .col-right {
+float: left;
+padding-right: 15px;
+padding-left: 15px;
+}
+#layout .col-right {
+width : 22.44%;
+}
+#layout .col-main {
+width : 77.55%	
+}
+#layout .row {
+}
+#layout .row::before {
+display: table;
+content: " ";
+}
+#layout .row::after {
+clear: both;
+content: " ";
+}
 @media screen and (min-width: $(main.breaking.point)) {
-	.col-main, .col-right {
-		float: left;
-	}
-	.col-right {
-	  width : 22.44%;
-	}
-	.col-main {
-	  width : 77.55%	
-	}
+.col-main, .col-right {
+float: left;
 }
-
+.col-right {
+width : 22.44%;
+}
+.col-main {
+width : 77.55%	
+}
+}
 /* Dimension and sizes */
 /* Post */ 
 .post {
 margin-bottom: 1.2em;
 padding: 2em;
+position: relative;
 }
 .post-footer {
 clear: both;
@@ -294,14 +193,34 @@ clear: both;
 .post-body {
 width: auto; 
 }
-.post-body-hide-images img:first-child {
+.has-post-image img:first-child {
 display: none;
 }
-.post-text-trimmer-disabled {
-height: 100%;
-max-height: 325px;
-overflow: hidden;
+.thumb-size-wrap > img {
+width: 100%;
+height: auto;
+}
+.thumb-size-wrap {
+width: 33%;
+float: left;
+margin: 0.2em 1.2em 0.2em -0em;
+}
+.post-spacer {
+display: block;
+width: 100%;
+padding-bottom : 2.5em;
+}
+.post-links {
+margin-top: -3em;
+height: 3em;
 position: relative;
+padding-left: 0.8em;
+}
+.post-body {
+display: inline;
+}
+.has-post-image  .separator {
+clear: none !important;
 }
 .post-text-trimmer-disabled .post-text-smoth-trimmer-bg{
 position: absolute;
@@ -331,7 +250,6 @@ font-size: 200%;
 .post-body * {
 max-width: 100%;
 }
-
 .share-button-link-text  {
 text-indent: 0;
 display: inline;
@@ -353,26 +271,35 @@ width : 100%;
 .widget ul {
 padding : 0 0 0 0;
 }
-
 .col-right .widget h2 {
-  font-size: 1.2em;
-  width: 100%;
-  border-bottom: 2px solid #999;
-  padding-bottom: 1em;
+font-size: 1.2em;
+width: 100%;
+border-bottom: 2px solid #999;
+padding-bottom: 1em;
 }
 .section {
-  margin: 0px 0px;
+margin: 0px 0px;
+}
+
+.post-footer-line-2  {
+  width : 80%;
+  margin-left: -15px;
+  margin-right: -15px;
+  text-align : center;
+  line-height: 0;
+  white-space: nowrap;
+  
+}
+.post-footer-line-2 > .share-bubble {
+  display: inline;
+
 }
 ]]>
     </b:template-skin>
-    <meta charset='utf-8'/>
-    <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'/>
-    
-    <meta content='width=device-width, initial-scale=1' name='viewport'/>
-    <!-- HTML5 boilerplate scripts and styles  -->
-    <link href='http://fonts.googleapis.com/css?family=Signika|Open+Sans:400,700' rel='stylesheet' type='text/css'/>
+    <!-- Fonts  -->
+    <link href='//fonts.googleapis.com/css?family=Signika|Open+Sans:400,700' rel='stylesheet' type='text/css'/>
+    <link href='//cdn.jsdelivr.net/fontawesome/4.4.0/css/font-awesome.min.css' rel='stylesheet'/>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-   
     &lt;!--[if gte IE 9]&gt;
     <style type='text/css'>
       .gradient {
@@ -402,7 +329,7 @@ padding : 0 0 0 0;
         gapi.load(&quot;gapi.iframes:gapi.iframes.style.bubble&quot;, function() {
           if (gapi.iframes &amp;&amp; gapi.iframes.getContext) {
             gapi.iframes.getContext().openChild({
-                url: &#39;https://www.blogger.com/navbar.g?targetBlogID\0753757653668839691723\46blogName\75Anabella+Veress\47s+Blog\46publishMode\75PUBLISH_MODE_BLOGSPOT\46navbarType\75DISABLED\46layoutType\75LAYOUTS\46searchRoot\75//anabellaveress.blogspot.com/search\46blogLocale\75en\46v\0752\46homepageUrl\75http://anabellaveress.blogspot.com/\46vt\75-3231881634342402203&#39;,
+                url: &#39;https://www.blogger.com/navbar.g?targetBlogID\0753757653668839691723\46blogName\75Anabella\47s+Photography+Blog\46publishMode\75PUBLISH_MODE_BLOGSPOT\46navbarType\75DISABLED\46layoutType\75LAYOUTS\46searchRoot\75//anabellaveress.blogspot.com/search\46blogLocale\75en\46v\0752\46homepageUrl\75http://anabellaveress.blogspot.com/\46vt\75-3231881634342402203&#39;,
                 where: document.getElementById(&quot;navbar-iframe-container&quot;),
                 id: &quot;navbar-iframe&quot;
             });
@@ -429,15 +356,13 @@ head.appendChild(script);
         </b:if>
       </div>
     </b:if>
-    <div class='header-container container container-main-block'>
-      <header class='wrapper clearfix'>
-        <b:section class='header' id='header' maxwidgets='1' name='Header' showaddelement='no'>
-          <b:widget id='Header1' locked='false' title='Anabella Veress&apos;s Blog (Header)' type='Header'>
-            <b:includable id='main'>
-			 
-              <b:if cond='data:useImage'>
-                <b:if cond='data:imagePlacement == &quot;BEHIND&quot;'>
-                  <!--
+    <header class='header-container container container-main-block clearfix'>
+      <b:section class='header' id='header' maxwidgets='1' name='Header' showaddelement='no'>
+        <b:widget id='Header1' locked='false' title='Anabella&apos;s Photography Blog (Header)' type='Header'>
+          <b:includable id='main'>
+            <b:if cond='data:useImage'>
+              <b:if cond='data:imagePlacement == &quot;BEHIND&quot;'>
+                <!--
 Show image as background to text. You can't really calculate the width
 reliably in JS because margins are not taken into account by any of
 clientWidth, offsetWidth or scrollWidth, so we don't force a minimum
@@ -445,77 +370,101 @@ width if the user is using shrink to fit.
 This results in a margin-width's worth of pixels being cropped. If the
 user is not using shrink to fit then we expand the header.
 -->
-                  <b:if cond='data:mobile'>
-                    <div id='header-inner'>
-                      <div class='titlewrapper' style='background: transparent'>
-                        <h1 class='title' style='background: transparent; border-width: 0px'>
-                          <b:include name='title'/>
-                        </h1>
-                      </div>
-                      <b:include name='description'/>
-                    </div>
-                    <b:else/>
-                    <div expr:style='&quot;background-image: url(\&quot;&quot; + data:sourceUrl + &quot;\&quot;); &quot;                      + &quot;background-position: &quot;                      + data:backgroundPositionStyleStr + &quot;; &quot;                      + data:widthStyleStr                      + &quot;min-height: &quot; + data:height                      + &quot;_height: &quot; + data:height                      + &quot;background-repeat: no-repeat; &quot;' id='header-inner'>
-                      <div class='titlewrapper' style='background: transparent'>
-                        <h1 class='title' style='background: transparent; border-width: 0px'>
-                          <b:include name='title'/>
-                        </h1>
-                      </div>
-                      <b:include name='description'/>
-                    </div>
-                  </b:if>
-                  <b:else/>
-                  <!--Show the image only-->
+                <b:if cond='data:mobile'>
                   <div id='header-inner'>
-                    <a expr:href='data:blog.homepageUrl' style='display: block'>
-                      <img expr:alt='data:title' expr:height='data:height' expr:id='data:widget.instanceId + &quot;_headerimg&quot;' expr:src='data:sourceUrl' expr:width='data:width' style='display: block'/>
-                    </a>
-                    <!--Show the description-->
-                    <b:if cond='data:imagePlacement == &quot;BEFORE_DESCRIPTION&quot;'>
-                      <b:include name='description'/>
-                    </b:if>
+                    <div class='titlewrapper' style='background: transparent'>
+                      <h1 class='title' style='background: transparent; border-width: 0px'>
+                        <b:include name='title'/>
+                      </h1>
+                    </div>
+                    <b:include name='description'/>
+                  </div>
+                  <b:else/>
+                  <div expr:style='&quot;background-image: url(\&quot;&quot; + data:sourceUrl + &quot;\&quot;); &quot;                      + &quot;background-position: &quot;                      + data:backgroundPositionStyleStr + &quot;; &quot;                      + data:widthStyleStr                      + &quot;min-height: &quot; + data:height                      + &quot;_height: &quot; + data:height                      + &quot;background-repeat: no-repeat; &quot;' id='header-inner'>
+                    <div class='titlewrapper' style='background: transparent'>
+                      <h1 class='title' style='background: transparent; border-width: 0px'>
+                        <b:include name='title'/>
+                      </h1>
+                    </div>
+                    <b:include name='description'/>
                   </div>
                 </b:if>
                 <b:else/>
-                <!--No header image -->
+                <!--Show the image only-->
                 <div id='header-inner'>
-                  <div class='titlewrapper'>
-                    <h1 class='title'>
-                      <b:include name='title'/>
-                    </h1>
-                  </div>
-                  <b:include name='description'/>
+                  <a expr:href='data:blog.homepageUrl' style='display: block'>
+                    <img expr:alt='data:title' expr:height='data:height' expr:id='data:widget.instanceId + &quot;_headerimg&quot;' expr:src='data:sourceUrl' expr:width='data:width' style='display: block'/>
+                  </a>
+                  <!--Show the description-->
+                  <b:if cond='data:imagePlacement == &quot;BEFORE_DESCRIPTION&quot;'>
+                    <b:include name='description'/>
+                  </b:if>
                 </div>
               </b:if>
-            </b:includable>
-            <b:includable id='description'>
-              <div class='descriptionwrapper'>
-                <p class='description'>
-                  <span>
-                    <data:description/>
-                  </span>
-                </p>
+              <b:else/>
+              <!--No header image -->
+              <div id='header-inner'>
+                <div class='titlewrapper'>
+                  <h1 class='title'>
+                    <b:include name='title'/>
+                  </h1>
+                </div>
+                <b:include name='description'/>
               </div>
-            </b:includable>
-            <b:includable id='title'>
-              <b:if cond='data:blog.url == data:blog.homepageUrl'>
+            </b:if>
+          </b:includable>
+          <b:includable id='description'>
+            <div class='descriptionwrapper'>
+              <p class='description'>
+                <span>
+                  <data:description/>
+                </span>
+              </p>
+            </div>
+          </b:includable>
+          <b:includable id='title'>
+            <b:if cond='data:blog.url == data:blog.homepageUrl'>
+              <data:title/>
+              <b:else/>
+              <a expr:href='data:blog.homepageUrl'>
                 <data:title/>
-                <b:else/>
-                <a expr:href='data:blog.homepageUrl'>
-                  <data:title/>
-                </a>
+              </a>
+            </b:if>
+          </b:includable>
+        </b:widget>
+      </b:section>
+      <nav>
+        <b:section class='tabs' id='crosscol' maxwidgets='1' name='Cross-Column' showaddelement='yes'>
+          <b:widget id='PageList1' locked='true' title='Pages' type='PageList'>
+            <b:includable id='main'>
+              <b:if cond='data:links.length &gt; 1 or (data:links.length == 1 and  data:links[0].href != data:blog.homepageUrl)'>
+                <div class='pages'>
+                  <ul class='nav nav-tabs'>
+                    <b:loop values='data:links' var='link'>
+                      <b:if cond='data:link.isCurrentPage'>
+                        <li class='active' role='presentation'>
+                          <a>
+                            <data:link.title/>
+                          </a>
+                        </li>
+                        <b:else/>
+                        <li role='presentation'>
+                          <a expr:href='data:link.href'>
+                            <data:link.title/>
+                          </a>
+                        </li>
+                      </b:if>
+                    </b:loop>
+                  </ul>
+                </div>
               </b:if>
             </b:includable>
           </b:widget>
         </b:section>
-        <nav>
-          <b:section class='tabs' id='crosscol' maxwidgets='1' name='Cross-Column' showaddelement='yes'/>
-          <b:section class='tabs' id='crosscol-overflow' name='Cross-Column 2' showaddelement='no'/>
-        </nav>
-      </header>
-    </div>
-    <div class='container container-main-block'>
-      <div class='main-container row'>
+      </nav>
+    </header>
+    <div class='container container-main-block clearfix'>
+      <div class='row'>
         <div class='col-main main wrapper'>
           <b:section class='main' id='main' name='Main' showaddelement='yes'>
             <b:widget id='Blog1' locked='false' title='Blog Posts' type='Blog'>
@@ -530,7 +479,6 @@ user is not using shrink to fit then we expand the header.
                 </div>
                 <!-- navigation -->
                 <b:include name='nextprev'/>
-               
               </b:includable>
               <b:includable id='backlinkDeleteIcon' var='backlink'>
                 <span expr:class='&quot;item-control &quot; + data:backlink.adminClass'>
@@ -1023,113 +971,138 @@ user is not using shrink to fit then we expand the header.
                 <div class='clear'/>
               </b:includable>
               <b:includable id='post' var='post'>
-                <div class='post' itemprop='blogPost' itemscope='itemscope' itemtype='http://schema.org/BlogPosting'>
-                  <div class='post-options-dropdown dropdown'>
-                    <button aria-expanded='false' aria-haspopup='true' data-toggle='dropdown' id='dLabel' type='button'>
-                      <span class='fa fa-ellipsis-h visible-xs-inline'/>
-                      <span class='fa fa-ellipsis-v hidden-xs'/>
-                    </button>
-                    <ul aria-labelledby='dLabel' class='dropdown-menu dropdown-menu-right'>
-                      <b:include data='post' name='shareButtons'/>
-                    </ul>
-                  </div>
-                  <!--b:if cond='data:post.thumbnailUrl'>
-                    <img expr:src='data:post.thumbnailUrl'/>
-                  </b:if-->
-                  <b:if cond='data:post.firstImageUrl'>
-                    <meta expr:content='data:post.firstImageUrl' itemprop='image_url'/>
-                  </b:if>
-                  <meta expr:content='data:blog.blogId' itemprop='blogId'/>
-                  <meta expr:content='data:post.id' itemprop='postId'/>
-                  <b:if cond='data:blog.metaDescription'>
-				    <meta expr:content='data:blog.metaDescription' itemprop='description'/>
-                  <b:else/>
-				    <meta expr:content='data:post.snippet' itemprop='description'/>
-                  </b:if>
-                   <b:if cond='data:blog.pageType == &quot;item&quot;'>
-				  	<meta expr:content='data:post.url' property='og:url'/>
-                    <meta content='website' property='og:type'/>
-                    <meta expr:content='data:post.title' property='og:title'/>
-                    
-					<b:if cond='data:blog.metaDescription'>
-				      <meta expr:content='data:blog.metaDescription' itemprop='description' property='og:description'/>
-                    <b:else/>
-                      <meta expr:content='data:post.snippet' itemprop='description' property='og:description'/>
-				      
-                    </b:if>
-                    
-					<b:if cond='data:post.postFirstImageUrl'>
-						<meta expr:content='data:post.postFirstImageUrl' property='og:image'/>	
-					<b:else/>
-						<b:if cond='data:post.postFirstImageUrl'>
-                        	<meta expr:content='data:post.postFirstImageUrl ? data:post.postFirstImageUrl:data:post.thumbnailUrl' property='og:image'/>	
-                        </b:if>
-					</b:if>
-                    
-				  </b:if>
-				  <a expr:name='data:post.id'/>
-                  <b:if cond='data:post.title'>
-                    <h3 class='post-title entry-title' itemprop='name'>
-                      <b:if cond='data:post.link or (data:post.url and data:blog.url != data:post.url)'>
-                        <a expr:href='data:post.link ? data:post.link : data:post.url'>
-                          <data:post.title/>
-                        </a>
-                        <b:else/>
-                        <data:post.title/>
-                      </b:if>
-                    </h3>
-                  </b:if>
-                  <b:if cond='data:post.dateHeader'>
-                    <div class='date-header'>
-                      <span>
-                        <data:post.dateHeader/>
-                      </span>
-                    </div>
-                  </b:if>
-                  
-                  <div class='row'>
-                    <b:if cond='data:post.firstImageUrl and (data:post.link or (data:post.url and data:blog.url != data:post.url))'>
-                      <div class='col-md-5'>
-                        <img class='post-thumb' expr:src='data:post.firstImageUrl'/>
-                      </div>
-                    </b:if>
-                    <!-- Then use the post body as the schema.org description, for good G+/FB snippeting. -->
-                    <div expr:class='data:post.firstImageUrl and (data:post.link or (data:post.url and data:blog.url != data:post.url)) ? &quot; col-md-7 post-body-hide-images&quot; : &quot;col-md-12&quot;'>
-                      <div expr:class='(data:post.link or (data:post.url and data:blog.url != data:post.url)) ? &quot; post-body entry-content post-text-trimmer &quot; : &quot;post-body entry-content &quot;' expr:id='&quot;post-body-&quot; + data:post.id' expr:itemprop='(data:blog.metaDescription ? &quot;&quot; : &quot;description &quot;) + &quot;articleBody&quot;'>
-                        <data:post.body/>
-                        <div class='post-text-smoth-trimmer-bg white-fader'/>
-                      </div>
-                      <div style='clear: both;'/>
-                      <!-- clear for photos floats -->
-                      <b:if cond='data:post.link or (data:post.url and data:blog.url != data:post.url)'>
-                        <a class='btn jump-link' expr:href='data:post.url + &quot;#more&quot;' expr:title='data:post.title'>
-                          <data:post.jumpText/>
-                        </a>
-                      </b:if>
-                    </div>
-                  </div>
-                  <div class='post-footer'>
-                    <div class='post-footer-line post-footer-line-1'>
-                      <span class='post-labels'>
-                        <b:if cond='data:post.labels'>
-                          <data:postLabelsLabel/>
-                          <b:loop values='data:post.labels' var='label'>
-                            <a expr:href='data:label.url' rel='tag'>
-                              <data:label.name/>
-                            </a>
-                            <b:if cond='not data:label.isLast'>
-                              ,
+                <div class='post'>
+                  <div itemprop='blogPost' itemscope='itemscope' itemtype='http://schema.org/BlogPosting'>
+                    <b:include data='post' name='postMetasItem'/>
+                    <b:include data='post' name='postMetasIndex'/>
+                    <a expr:name='data:post.id'/>
+                        <b:if cond='data:post.title'>
+                          <h3 class='post-title entry-title' itemprop='headline'>
+                            <b:if cond='data:post.link or (data:post.url and data:blog.url != data:post.url)'>
+                              <a expr:href='data:post.link ? data:post.link : data:post.url'>
+                                <data:post.title/>
+                              </a>
+                              <b:else/>
+                              <data:post.title/>
                             </b:if>
-                          </b:loop>
+                          </h3>
                         </b:if>
-                      </span>
+                      
+                    <b:if cond='data:post.date'>
+                      <div class='date-header'>
+                        <span itemprop='datePublished'>
+                          <data:post.date/>
+                        </span>
+                      </div>
+                    </b:if>
+                    <article class='post-body-wrap'>
+                      <b:if cond='data:post.firstImageUrl and data:blog.pageType != &quot;item&quot; '>
+                        <div class='thumb-size-wrap'>
+                          <img expr:src='data:post.firstImageUrl' itemprop='image'/>
+                        </div>
+                      </b:if>
+					  
+                      <div expr:class='(data:post.firstImageUrl and data:blog.pageType != &quot;item&quot;  ? &quot;has-post-image&quot; : &quot;no-post-image&quot; ) + &quot; post-body entry-content&quot;' expr:id='&quot;post-body-&quot; + data:post.id' expr:itemprop='(data:blog.metaDescription ? &quot;&quot; : &quot;description &quot;) + &quot;articleBody&quot;'>
+                        <data:post.body/>
+                      </div>
+                      <div class='post-spacer'>
+                      </div>
+                      <div class='clearfix'>
+                      </div>
+                      <b:if cond='data:post.hasJumpLink'>
+                        <div class='post-links'>
+                          <a class='btn jump-link' expr:href='data:post.url + &quot;#more&quot;' expr:title='data:post.title'>
+                            <data:post.jumpText/>
+                          </a>
+                        </div>
+                      </b:if>
+                    </article>
+                    <div class='post-footer'>
+                      <div class='post-footer-line post-footer-line-1'>
+                        <span class='post-labels'>
+                          <b:if cond='data:post.labels'>
+                            <data:postLabelsLabel/>
+                            <b:loop values='data:post.labels' var='label'>
+                              <a expr:href='data:label.url' rel='tag'>
+                                <data:label.name/>
+                              </a>
+                              <b:if cond='not data:label.isLast'>
+                                ,
+                              </b:if>
+                            </b:loop>
+                          </b:if>
+                        </span>
+                      </div>
                     </div>
+                    <div class='post-footer-line post-footer-line-2 row'>
+						 <div class='share-bubble fb-share-button' data-layout='button_count' expr:data-href='data:post.canonicalUrl'>
+                        </div>
+                        <div class='share-bubble'>
+							<div class='g-plus' data-action='share' data-annotation='bubble' expr:data-href='data:post.canonicalUrl'/>
+						</div>
+                        <div class='share-bubble'>
+                          <a class='twitter-share-button' expr:data-text='data:post.title ?  data:post.title : data:blog.pageTitle' expr:data-url='data:post.canonicalUrl' href='https://twitter.com/share'/>
+                        </div>
+					</div>
                   </div>
                   <div class='post-icons'>
                     <!-- quickedit pencil -->
                     <b:include data='post' name='postQuickEdit'/>
                   </div>
+                  
+					
                 </div>
+                <!-- .post-->
+              </b:includable>
+              <b:includable id='postDropdown' var='post'>
+                <div class='post-options-dropdown dropdown'>
+                  <button aria-expanded='false' aria-haspopup='true' data-toggle='dropdown' id='dLabel' type='button'>
+                    <span class='fa fa-ellipsis-h visible-xs-inline'/>
+                    <span class='fa fa-ellipsis-v hidden-xs'/>
+                  </button>
+                  <ul aria-labelledby='dLabel' class='dropdown-menu dropdown-menu-right'>
+                    <b:include data='post' name='shareButtons'/>
+                  </ul>
+                </div>
+              </b:includable>
+              <b:includable id='postMetasIndex' var='post'>
+                <b:if cond='data:blog.pageType == &quot;index&quot;'>
+                  <b:if cond='data:post.firstImageUrl'>
+                    <meta expr:content='data:post.firstImageUrl' itemprop='image'/>
+                    <b:else/>
+                    <b:if cond='data:post.thumbnailUrl'>
+                      <meta expr:content='data:post.thumbnailUrl' itemprop='image'/>
+                    </b:if>
+                  </b:if>
+                </b:if>
+              </b:includable>
+              <b:includable id='postMetasItem' var='post'>
+                <b:if cond='data:blog.pageType == &quot;item&quot;'>
+                  <!-- for Twitter -->          
+                  <meta content='summary' name='twitter:card'/>
+                  <!-- Meta title -->
+                  <b:if cond='data:post.title'>
+                    <meta expr:content='data:post.title' name='twitter:title'/>
+                    <b:else/>
+                    <meta expr:content='data:blog.pageTitle' name='twitter:title'/>
+                  </b:if>
+                  <b:if cond='data:blog.metaDescription'>
+                    <meta expr:content='data:blog.metaDescription' name='twitter:description'/>
+                    <meta expr:content='data:blog.metaDescription' itemprop='description'/>
+                    <b:else/>
+                    <meta expr:content='data:post.snippet' name='twitter:description'/>
+                    <meta expr:content='data:post.snippet' itemprop='description'/>
+                  </b:if>
+                  <b:if cond='data:post.firstImageUrl'>
+                    <meta expr:content='data:post.firstImageUrl' name='twitter:image'/>
+                    <meta expr:content='data:post.firstImageUrl' itemprop='image'/>
+                    <b:else/>
+                    <b:if cond='data:post.thumbnailUrl'>
+                      <meta expr:content='data:post.thumbnailUrl' name='twitter:image'/>
+                      <meta expr:content='data:post.thumbnailUrl' itemprop='image'/>
+                    </b:if>
+                  </b:if>
+                </b:if>
               </b:includable>
               <b:includable id='postQuickEdit' var='post'>
                 <b:if cond='data:post.editUrl'>
@@ -1161,19 +1134,15 @@ user is not using shrink to fit then we expand the header.
                     </a>
                   </li>
                 </b:if>
-				
                 <b:if cond='data:top.showFacebookButton'>
                   <li class='item-share'>
-					<a>
-					 <!-- Your share button code -->
-                    <div class='fb-share-button' data-layout='button_count' expr:data-href='data:post.url'>
-                    </div>
+                    <a>
+                      <!-- Your share button code -->
+                      <div class='fb-share-button' data-layout='button_count' expr:data-href='data:post.url'>
+                      </div>
                     </a>
-				  </li>
+                  </li>
                   <li class='item-share'>
-
-
-
                     <a class='fb-share-button share-button-link sb-facebook' data-layout='button_count' expr:data-href='data:post.link ? data:post.link : data:post.url' expr:href='data:post.sharePostUrl + &quot;&amp;target=facebook&quot;' expr:onclick='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=430,width=640\&quot;); return false;&quot;' expr:title='data:top.shareToFacebookMsg' target='_blank'>
                       <span class='fa fa-facebook'/>
                       <span class='share-button-link-text'>
@@ -1251,7 +1220,10 @@ user is not using shrink to fit then we expand the header.
                       if (entry.gd$extendedProperty) {
                         for (var k in entry.gd$extendedProperty) {
                           if (entry.gd$extendedProperty[k].name == 'blogger.contentRemoved') {
-                            return '<span class="deleted-comment">' + entry.content.$t + '</span>';
+                            return '
+                            <span class="deleted-comment">
+                              ' + entry.content.$t + '
+                </span>';
                           }
                         }
                       }
@@ -1312,7 +1284,8 @@ user is not using shrink to fit then we expand the header.
                         }
                         window.bloggercomments = function(data) {
                           var parsed = parse(data);
-                          cursor = parsed.length < 50 ? null
+                          cursor = parsed.length 
+                          < 50 ? null
                           : parseInt(parsed[parsed.length - 1].timestamp) + 1
                           callback(parsed);
                           window.bloggercomments = null;
@@ -1481,8 +1454,9 @@ user is not using shrink to fit then we expand the header.
           // Stuf related to the post formatting , as much as I would like to do this on the server side is not posible 
           // Format embed elements to be 100% of the width of their container and with 16/9 ratio 
           var embedWrapper = $(&#39;&lt;div&gt;&#39;).addClass(&#39;embed-responsive embed-responsive-16by9&#39;)
-                               $(&#39;.post-body .YOUTUBE-iframe-video&#39;).addClass(&#39;embed-responsive-item&#39;).wrap(embedWrapper);
+                               $(&#39;.post-body .YOUTUBE-iframe-video , .BLOG_video_class&#39;).addClass(&#39;embed-responsive-item&#39;).wrap(embedWrapper);
                                });
+          // facebook js api
           window.fbAsyncInit = function() {
             FB.init({
               appId      : &#39;101138540241057&#39;,
@@ -1497,7 +1471,10 @@ user is not using shrink to fit then we expand the header.
             js.src = &quot;//connect.facebook.net/en_US/sdk.js&quot;;
             fjs.parentNode.insertBefore(js, fjs);
           }(document, &#39;script&#39;, &#39;facebook-jssdk&#39;));
+           // Twitter js api
+           !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?&#39;http&#39;:&#39;https&#39;;if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+&#39;://platform.twitter.com/widgets.js&#39;;fjs.parentNode.insertBefore(js,fjs);}}(document, &#39;script&#39;, &#39;twitter-wjs&#39;);
     </script>
+	<script async='async' defer='defer' src='//apis.google.com/js/platform.js'/>
     <b:include data='blog' name='google-analytics'/>
   </body>
   <macro:includable id='sections' var='col'>
@@ -1540,16 +1517,16 @@ user is not using shrink to fit then we expand the header.
 <b:section-contents id='sidebar-right-1'>
   <b:widget id='HTML4' locked='false' title='' type='HTML'>
     <b:includable id='main'>
-  <!-- only display title if it's non-empty -->
-  <b:if cond='data:title != &quot;&quot;'>
-    <h2 class='title'><data:title/></h2>
-  </b:if>
-  <div class='widget-content'>
-    <data:content/>
-  </div>
-
-  <b:include name='quickedit'/>
-</b:includable>
+        <!-- only display title if it's non-empty -->
+        <b:if cond='data:title != &quot;&quot;'>
+          <h2 class='title'>
+            <data:title/>
+          </h2>
+        </b:if>
+        <div class='widget-content'>
+          <data:content/>
+        </div>
+      </b:includable>
   </b:widget>
   <b:widget id='HTML1' locked='false' title='Featured Posts' type='HTML'>
     <b:includable id='main'>
@@ -1562,48 +1539,64 @@ user is not using shrink to fit then we expand the header.
         <div class='widget-content'>
           <data:content/>
         </div>
-        <b:include name='quickedit'/>
       </b:includable>
   </b:widget>
   <b:widget id='PopularPosts1' locked='false' title='Popular Posts' type='PopularPosts'>
     <b:includable id='main'>
-  <b:if cond='data:title != &quot;&quot;'><h2><data:title/></h2></b:if>
-  <div class='widget-content popular-posts'>
-    <ul>
-      <b:loop values='data:posts' var='post'>
-      <li>
-        <b:if cond='!data:showThumbnails'>
-          <b:if cond='!data:showSnippets'>
-            <!-- (1) No snippet/thumbnail -->
-            <a expr:href='data:post.href'><data:post.title/></a>
-          <b:else/>
-            <!-- (2) Show only snippets -->
-            <div class='item-title'><a expr:href='data:post.href'><data:post.title/></a></div>
-            <div class='item-snippet'><data:post.snippet/></div>
-          </b:if>
-        <b:else/>
-          <!-- (3) Show only thumbnails or (4) Snippets and thumbnails. -->
-          <div expr:class='data:showSnippets ? &quot;item-content&quot; : &quot;item-thumbnail-only&quot;'>
-            <b:if cond='data:post.thumbnail'>
-              <div class='item-thumbnail'>
-                <a expr:href='data:post.href' target='_blank'>
-                  <img alt='' border='0' expr:height='data:thumbnailSize' expr:src='data:post.thumbnail' expr:width='data:thumbnailSize'/>
-                </a>
-              </div>
-            </b:if>
-            <div class='item-title'><a expr:href='data:post.href'><data:post.title/></a></div>
-            <b:if cond='data:showSnippets'>
-              <div class='item-snippet'><data:post.snippet/></div>
-            </b:if>
-          </div>
-          <div style='clear: both;'/>
+        <b:if cond='data:title != &quot;&quot;'>
+          <h2>
+            <data:title/>
+          </h2>
         </b:if>
-      </li>
-      </b:loop>
-    </ul>
-    <b:include name='quickedit'/>
-  </div>
-</b:includable>
+        <div class='widget-content popular-posts'>
+          <ul>
+            <b:loop values='data:posts' var='post'>
+              <li>
+                <b:if cond='!data:showThumbnails'>
+                  <b:if cond='!data:showSnippets'>
+                    <!-- (1) No snippet/thumbnail -->
+                    <a expr:href='data:post.href'>
+                      <data:post.title/>
+                    </a>
+                    <b:else/>
+                    <!-- (2) Show only snippets -->
+                    <div class='item-title'>
+                      <a expr:href='data:post.href'>
+                        <data:post.title/>
+                      </a>
+                    </div>
+                    <div class='item-snippet'>
+                      <data:post.snippet/>
+                    </div>
+                  </b:if>
+                  <b:else/>
+                  <!-- (3) Show only thumbnails or (4) Snippets and thumbnails. -->
+                  <div expr:class='data:showSnippets ? &quot;item-content&quot; : &quot;item-thumbnail-only&quot;'>
+                    <b:if cond='data:post.thumbnail'>
+                      <div class='item-thumbnail'>
+                        <a expr:href='data:post.href' target='_blank'>
+                          <img alt='' border='0' expr:height='data:thumbnailSize' expr:src='data:post.thumbnail' expr:width='data:thumbnailSize'/>
+                        </a>
+                      </div>
+                    </b:if>
+                    <div class='item-title'>
+                      <a expr:href='data:post.href'>
+                        <data:post.title/>
+                      </a>
+                    </div>
+                    <b:if cond='data:showSnippets'>
+                      <div class='item-snippet'>
+                        <data:post.snippet/>
+                      </div>
+                    </b:if>
+                  </div>
+                  <div style='clear: both;'/>
+                </b:if>
+              </li>
+            </b:loop>
+          </ul>
+        </div>
+      </b:includable>
   </b:widget>
   <b:widget id='Label1' locked='false' title='Search By Tags' type='Label'>
     <b:includable id='main'>
@@ -1658,7 +1651,6 @@ user is not using shrink to fit then we expand the header.
               </span>
             </b:loop>
           </b:if>
-          <b:include name='quickedit'/>
         </div>
       </b:includable>
   </b:widget>
@@ -1673,7 +1665,6 @@ user is not using shrink to fit then we expand the header.
         <div class='widget-content'>
           <data:content/>
         </div>
-        <b:include name='quickedit'/>
       </b:includable>
   </b:widget>
   <b:widget id='BlogArchive1' locked='false' title='Archive' type='BlogArchive'>
@@ -1691,7 +1682,6 @@ user is not using shrink to fit then we expand the header.
               <b:include cond='data:style == &quot;MENU&quot;' data='data' name='menu'/>
             </div>
           </div>
-          <b:include name='quickedit'/>
         </div>
       </b:includable>
     <b:includable id='flat' var='data'>
@@ -1770,6 +1760,20 @@ user is not using shrink to fit then we expand the header.
   </b:widget>
   <b:widget id='HTML3' locked='false' title='Follow Me On' type='HTML'>
     <b:includable id='main'>
+        <!-- only display title if it's non-empty -->
+        <b:if cond='data:title != &quot;&quot;'>
+          <h2 class='title'>
+            <data:title/>
+          </h2>
+        </b:if>
+        <div class='widget-content'>
+          <data:content/>
+        </div>
+      </b:includable>
+  </b:widget>
+</b:section-contents><b:section-contents id='footer-1'>
+  <b:widget id='HTML5' locked='false' title='' type='HTML'>
+    <b:includable id='main'>
   <!-- only display title if it's non-empty -->
   <b:if cond='data:title != &quot;&quot;'>
     <h2 class='title'><data:title/></h2>
@@ -1781,4 +1785,4 @@ user is not using shrink to fit then we expand the header.
   <b:include name='quickedit'/>
 </b:includable>
   </b:widget>
-</b:section-contents><b:section-contents id='footer-1'/><b:section-contents id='footer-2-1'/><b:section-contents id='footer-2-2'/></html>
+</b:section-contents><b:section-contents id='footer-2-1'/><b:section-contents id='footer-2-2'/></html>
