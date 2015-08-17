@@ -1,18 +1,20 @@
-# AV Blogger Template 
+AV Blogger Template
+===================
 
 A blogger template inspired from a wix blog, theme forked from the simple template
 
+Installing
+----------
 
+So far, there is no solution to upload/download the template automatically, maybe `curl`
 
-## Installing
+Useful documentation links
+--------------------------
 
-So far, there is no solution to upload/download the template automaticaly, maybe `curl`
+-	Layout help : https://support.google.com/blogger/topic/12449?src=socgp
+-	Open Graph Protocol : http://ogp.me/
 
-## Useful documentation links 
+Other links:
+------------
 
-    * Layout help : https://support.google.com/blogger/topic/12449?src=socgp 
-    * Open Graph Protocol : http://ogp.me/
-
-## Other links:  
-
-    * The wix theme :  http://www.wix.com/demone2/small-brand-blog?showMobileView=false#!blog/cegh
+-	The wix theme : http://www.wix.com/demone2/small-brand-blog?showMobileView=false#!blog/cegh

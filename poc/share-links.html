@@ -8,17 +8,19 @@
 <button class="pop-share-button" data-share-chanel='twitter' data-share-url='http://example.com' >Share on twitter</button><br />
 <button class="pop-share-button" data-share-chanel='gPlus' data-share-url='http://example.com' >Share on google plus</button><br />
 <button class="pop-share-button" data-share-chanel='facebook' data-share-url='http://example.com' >Share on facebook</button><br />
+<button class="pop-share-button" data-share-chanel='facebook-feed' data-share-url='http://example.com' >Feed on facebook</button><br />
 <script>
   (function (w){
     var Sharer = function(){
       this.init();
-     
+
     }
-    
+
     Sharer.defaults = {
       sharePlatforms : [
         {chanel : 'gPlus', urlTemplate : "https://plus.google.com/share?url={{shareUrl}}"},
         {chanel : 'facebook', urlTemplate : "https://www.facebook.com/sharer/sharer.php?u={{shareUrl}}"},
+        {chanel : 'facebook-feed', urlTemplate : "https://www.facebook.com/dialog/feed?app_id={{appId}}&display=popup&caption={{caption}}&link={{shareUrl}}&redirect_uri={{redirectUrl}}&description={{description}}&name={{name}}&picture={{picture}}", appId : '145634995501895' },
         {chanel : 'twitter', urlTemplate : "https://twitter.com/intent/tweet?url={{shareUrl}}"},
       ],
       popoutOpts : 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600'
@@ -26,7 +28,7 @@
 
     Sharer.prototype.init = function (){
       this.popouts = [];
-      
+
     };
     /**
     * finds a share platform set in defaults values by name, return null if none was found
@@ -52,13 +54,13 @@
          break;
        }
       }
-      return result;       
+      return result;
     };
     /**
-    * Replaces the placeholders with 
+    * Replaces the placeholders with
     */
     Sharer.prototype.composePopoutUrl = function (shareUrl, sharePlatformUrl) {
-      var result = null;        
+      var result = null;
       if (sharePlatformUrl && shareUrl) {
          result = sharePlatformUrl.replace('\{\{shareUrl\}\}',w.encodeURIComponent(shareUrl));
       }
@@ -68,33 +70,30 @@
     * Opens the share popout for the chanel and the shareUrl, with the defaults opts.
     * Memonises the result
     */
-    Sharer.prototype.share = function (chanel, shareUrl){
+    Sharer.prototype.share = function (chanel, shareUrl, name){
       var platform = this.findSharePlatform(chanel);
       if (platform)
         var popoutUrl = this.composePopoutUrl(shareUrl ,platform.urlTemplate);
         if (popoutUrl){
-          var popout = this.openPopout(popoutUrl)
+          var popout = this.openPopout(popoutUrl, name)
           // memonise
           this.popouts.push({chanel:chanel, shareUrl: shareUrl, popoutUrl: popoutUrl,popout : popout});
         }
     };
 
     Sharer.prototype.listenHandler = function (ev){
-      this.share(ev.target.dataset.shareChanel, ev.target.dataset.shareUrl)
+      this.share(ev.target.dataset.shareChanel, ev.target.dataset.shareUrl,  ev.target.innerHTML);
     };
-    
-    
-    Sharer.prototype.openPopout = function(popoutUrl){
-      var popout = w.open(popoutUrl, 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-         
-         popout.addEventListener('load', function(){
-          console.log('sharewindow loaded');
-          popout.addEventListener('blur', function(){
-            popout.close();
-          })
+
+
+    Sharer.prototype.openPopout = function(popoutUrl, name){
+      var popout = w.open(popoutUrl, name,Sharer.defaults.popoutOpts);
+         w.addEventListener('focus', function(){
+           popout.close();
+           w.removeEventListener('focus', this);
          });
       return popout;
-    }
+    };
 
     if (!w.popoutSharer){
       w.popoutSharer = new Sharer();
@@ -102,16 +101,16 @@
     }
 
     // Usage
-    
+
      var buttons = w.document.querySelectorAll('.pop-share-button');
      for (var i = buttons.length; i--; ){
       console.log(buttons[i]);
       if (buttons[i].dataset.shareChanel && buttons[i].dataset.shareUrl){
         buttons[i].addEventListener('click', w.popoutSharerHandler);
       }
-      
+
      }
-      
+
   })(window)
 </script>
 </body>
