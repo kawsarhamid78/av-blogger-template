@@ -1,5 +1,5 @@
-AV Blogger Template
-===================
+AV Template
+===========
 
 A Blogger template inspired from a wix blog theme, forked from the blogger simple template.
 
@@ -8,10 +8,14 @@ The theme is responsive with the help of Bootstrap, aimed to be highly sharable 
 Installing
 ----------
 
-So far, there is no solution to upload/download the template automatically, maybe `curl`
+Download the files on your machine as a zip or if you're familiar with the git console clone this repo.
 
-Links to article or docs for research
--------------------------------------
+Then in the administration panel of your Blogger blog click on the `Template` (left panel), in the upper right corner click on the `Backup \ Restore`. In the popout upload the template file and finally click upload. Voila.
+
+Unfortunately, so far, there is no solution to upload/download the template automatically, maybe `curl`, but is a very very long fetch.
+
+Links to article, docs or tools used in research
+------------------------------------------------
 
 Useful documentation links:
 
